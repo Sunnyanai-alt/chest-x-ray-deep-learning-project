@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pneumonia Detection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f3f4f6;
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #1f2937;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+    }
+
+    nav .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+    nav .logo i {
+      margin-right: 10px;
+      color: #4ade80;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    input[type="file"] {
+      padding: 10px;
+      border: 2px dashed #9ca3af;
+      border-radius: 10px;
+      background: #f9fafb;
+      cursor: pointer;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 30px;
+      background-color: #4f46e5;
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #3730a3;
+    }
+
+    .prediction-result {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #10b981;
+    }
+
+    /* Info Cards */
+    .info-cards {
+      margin-top: 50px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      flex: 1;
+      min-width: 250px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+    }
+
+    .card-icon {
+      font-size: 36px;
+      color: #4a90e2;
+      margin-bottom: 15px;
+    }
+
+    .card h4 {
+      margin: 0 0 10px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .card p {
+      color: #666;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <i class="fas fa-x-ray"></i> Pneumonia Detection
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Upload Chest X-ray for Pneumonia Prediction</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" required>
+      <br>
+      <button type="submit" class="btn">Predict Now</button>
+    </form>
+
+    {% if prediction and image_url %}
+    <div class="container mt-5">
+      <div class="row justify-content-center align-items-center">
+
+        <div class="col-md-5 d-flex align-items-center justify-content-center">
+            <div class="p-4 bg-white rounded shadow border text-center w-100">
+              <h5 class="text-uppercase text-muted mb-3">Prediction Result</h5>
+              <p class="fs-3 fw-bold text-primary mb-0">{{ prediction }}</p>
+            </div>
+          </div>
+        
+        <!-- Uploaded Image -->
+        <div class="col-md-6 text-center mb-4 mb-md-0">
+          <img src="{{ image_url }}" alt="Uploaded Image" class="img-fluid rounded shadow" style="max-height: 350px;">
+        </div>       
+  
+      </div>
+    </div>
+  {% endif %}
+  
+
+
+    <div class="info-cards">
+      <div class="card">
+        <i class="fab fa-python card-icon"></i>
+        <h4>Powered by PyTorch</h4>
+        <p>Uses a transfer learning model built with VGG16 and fine-tuned for pneumonia classification.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-brain card-icon"></i>
+        <h4>Deep Learning</h4>
+        <p>Enhanced neural architecture for analyzing chest X-rays using convolutional and dense layers.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-lungs card-icon"></i>
+        <h4>Pneumonia Detection</h4>
+        <p>Classifies X-ray images as either normal or pneumonia with high accuracy using AI.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
